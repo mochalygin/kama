@@ -5,6 +5,7 @@ namespace AppBundle\Service;
 
 
 use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\Fren;
 
 /**
  * @author mochalygin
@@ -32,9 +33,9 @@ class Kama
             throw new \Exception('Fren with key ' . $key . ' already registered at this Kama');
         }
         
-        $fren = Fren::create()
-                ->setKey($key)
-                ->setRegisteredAt(new \DateTime());
+        $fren = new Fren;
+        $fren->setKey($key);
+                        
         $this->em->persist($fren);
         $this->em->flush();
         

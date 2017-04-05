@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Fren
  *
  * @ORM\Table(name="fren")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FrenRepository")
+ * @ORM\Entity
+ * 
+ * @ORM\HasLifecycleCallbacks() 
  */
 class Fren
 {
@@ -24,7 +26,7 @@ class Fren
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthdate", type="date")
+     * @ORM\Column(name="birthdate", type="datetime")
      */
     protected $registeredAt;
 
@@ -55,15 +57,11 @@ class Fren
     /**
      * Set registeredAt
      *
-     * @param \DateTime $registeredAt
-     *
-     * @return Fren
+     * @ORM\PrePersist
      */
-    public function setRegisteredAt(\DateTime $registeredAt)
+    public function setRegisteredAt()
     {
-        $this->registeredAt = $registeredAt;
-
-        return $this;
+        $this->registeredAt = new \DateTime;
     }
 
     /**
