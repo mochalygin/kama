@@ -8,18 +8,27 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fren
  *
- * @ORM\Table(name="fren")
+ * @ORM\Table
  * @ORM\Entity
- * 
- * @ORM\HasLifecycleCallbacks() 
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class Fren
 {
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
     /**
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255, unique=true)
-     * @ORM\Id
      */
     protected $key;
 
@@ -29,6 +38,16 @@ class Fren
      * @ORM\Column(name="birthdate", type="datetime")
      */
     protected $registeredAt;
+
+    /**
+     * Get Id
+     *
+     * @return integer
+     */
+    public function getId(): integer
+    {
+        return $this->id;
+    }
 
     /**
      * Set key

@@ -36,7 +36,7 @@ class Kama
      */
     public function registerFren(string $key): bool
     {
-        $fren = $this->em->getRepository(Fren::class)->find($key);
+        $fren = $this->em->getRepository(Fren::class)->findByKey($key);
         if ( $fren ) {
             throw new \Exception('Fren with key ' . $key . ' already registered at this Kama');
         }
@@ -49,5 +49,11 @@ class Kama
 
         return true;
     }
+
+    public function addMessage(string $frenKey, string $uuid, string $cryptedMsg): bool
+    {
+
+    }
+
 
 }
