@@ -64,6 +64,13 @@ class Message
     protected $sign;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_delivered", type="boolean", nullable=false)
+     */
+    protected $isDelivered = false;
+
+    /**
      * Set uuid
      *
      * @param string $uuid
@@ -200,5 +207,29 @@ class Message
     public function getSign(): string
     {
         return $this->sign;
+    }
+
+    /**
+     * Set isDelivered
+     *
+     * @param boolean $isDelivered
+     *
+     * @return Message
+     */
+    public function setIsDelivered(bool $isDelivered)
+    {
+        $this->isDelivered = $isDelivered;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelivered
+     *
+     * @return boolean
+     */
+    public function getIsDelivered(): bool
+    {
+        return $this->isDelivered;
     }
 }
