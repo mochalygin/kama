@@ -29,6 +29,8 @@ class Message
      *
      * @ORM\ManyToOne(targetEntity="Fren")
      * @ORM\JoinColumn(name="from_id", referencedColumnName="id", nullable=false)
+     *
+     * @todo а нужно ли это поле? оно позволяет спалить кто кому пишет. с другой стороны, если у тебя есть контроль над Камой -- ты и так знаешь
      */
     protected $from;
 
@@ -43,10 +45,23 @@ class Message
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthdate", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
-    protected $registeredAt;
+    protected $createdAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="crypted_data", type="text")
+     */
+    protected $cryptedData;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sign", type="string")
+     */
+    protected $sign;
 
     /**
      * Set uuid
@@ -55,7 +70,7 @@ class Message
      *
      * @return Message
      */
-    public function setUuid($uuid)
+    public function setUuid(string $uuid)
     {
         $this->uuid = $uuid;
 
@@ -67,28 +82,28 @@ class Message
      *
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): string
     {
         return $this->uuid;
     }
 
     /**
      * @ORM\PrePersist
-     * Set registeredAt
+     * Set createdAt
      */
-    public function setRegisteredAt()
+    public function setCreatedAt()
     {
-        $this->registeredAt = new \DateTime;
+        $this->createdAt = new \DateTime;
     }
 
     /**
-     * Get registeredAt
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getRegisteredAt()
+    public function getCreatedAt(): \DateTime
     {
-        return $this->registeredAt;
+        return $this->createdAt;
     }
 
     /**
@@ -110,7 +125,7 @@ class Message
      *
      * @return Fren
      */
-    public function getFrom()
+    public function getFrom(): Fren
     {
         return $this->from;
     }
@@ -134,8 +149,56 @@ class Message
      *
      * @return Fren
      */
-    public function getTo()
+    public function getTo(): Fren
     {
         return $this->to;
+    }
+
+    /**
+     * Set cryptedData
+     *
+     * @param string $cryptedData
+     *
+     * @return Message
+     */
+    public function setCryptedData(string $cryptedData)
+    {
+        $this->cryptedData = $cryptedData;
+
+        return $this;
+    }
+
+    /**
+     * Get cryptedData
+     *
+     * @return string
+     */
+    public function getCryptedData(): string
+    {
+        return $this->cryptedData;
+    }
+
+    /**
+     * Set sign
+     *
+     * @param string $sign
+     *
+     * @return Message
+     */
+    public function setSign(string $sign)
+    {
+        $this->sign = $sign;
+
+        return $this;
+    }
+
+    /**
+     * Get sign
+     *
+     * @return string
+     */
+    public function getSign(): string
+    {
+        return $this->sign;
     }
 }
